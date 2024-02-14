@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestClient;
 
 @SpringBootApplication
-public class ResourceServerApplication {
+public class OAuth2MultiTenancyApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ResourceServerApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(OAuth2MultiTenancyApplication.class, args);
+  }
 
-    @Bean
-    public RestClient restClient() {
-        return RestClient.builder().build();
-    }
+  @Bean
+  public RestClient restClient() {
+    return RestClient.builder().build();
+  }
 
 }
