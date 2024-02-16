@@ -17,21 +17,32 @@ spring:
     oauth2:
       client:
         provider:
+          pamiadu:
+            issuer-uri: http://localhost:8080
           azure-ad:
             issuer-uri: https://login.microsoftonline.com/1b286c40-c2fd-46d5-a553-b6502b89f42d/v2.0
           okta:
             issuer-uri: https://dev-09980417.okta.com
           azure-b2c:
-            authorization-uri: https://<tanant>.b2clogin.com/<tanant>.onmicrosoft.com/<policy>/oauth2/v2.0/authorize
-            jwk-set-uri: https://<tanant>.b2clogin.com/<tanant>.onmicrosoft.com/<policy>/discovery/v2.0/keys
-            token-uri: https://<tanant>.b2clogin.com/<tanant>.onmicrosoft.com/<policy>/oauth2/v2.0/token
+            authorization-uri: https://pamiadu.b2clogin.com/pamiadu.onmicrosoft.com/b2c_1_pamiadu/oauth2/v2.0/authorize
+            jwk-set-uri: https://pamiadu.b2clogin.com/pamiadu.onmicrosoft.com/b2c_1_pamiadu/discovery/v2.0/keys
+            token-uri: https://pamiadu.b2clogin.com/pamiadu.onmicrosoft.com/b2c_1_pamiadu/oauth2/v2.0/token
         registration:
+          pamiadu:
+            client-name: My Custom Authorization Server
+            provider: pamiadu
+            client-id: pamiadu
+            client-secret: pamiadu
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
+            redirect-uri: http://localhost:8081/login/oauth2/code/pamiadu
+            scope: openid, user.read
           azure-b2c:
             provider: azure-b2c
             client-id: <replace with your client id>
             client-secret: <replace with your client secret>
             scope: openid, email
-            redirect-uri: http://localhost:8080/login/oauth2/code/azure-b2c
+            redirect-uri: http://localhost:8081/login/oauth2/code/azure-b2c
             client-name: Microsoft B2C Login
             authorization-grant-type: authorization_code
           azure-ad:
@@ -39,12 +50,14 @@ spring:
             client-id: <replace with your client id>
             client-secret: <replace with your client secret>
             scope: openid, profile, email, offline_access
-            redirect-uri: http://localhost:8080/login/oauth2/code/azuread
+            redirect-uri: http://localhost:8081/login/oauth2/code/azuread
             client-name: Microsoft Entra ID (Azure AD)
           okta:
             provider: okta
             client-id: <replace with your client id>
             client-secret: <replace with your client secret>
             scope: openid, profile, email, offline_access
-            redirect-uri: http://localhost:8080/login/oauth2/code/okta
+            redirect-uri: http://localhost:8081/login/oauth2/code/okta
             client-name: Okta
+server:
+  port: 8081
