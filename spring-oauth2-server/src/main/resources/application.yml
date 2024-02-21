@@ -9,7 +9,7 @@ spring:
             require-authorization-consent: true
             registration:
               client-id: pamiadu
-              client-secret: pamiadu
+              client-secret: '{bcrypt}$2a$10$RhLDi5hKxNqBQcSkfRdIUemy9NGGKZZ/0J7y4BDNJbPtKYcZEgTnC'
               authorization-grant-types:
                 - authorization_code
                 - refresh_token
@@ -26,4 +26,4 @@ spring:
 logging:
   level:
     root: info
-    org.springframework.security: trace
+    org.springframework.security: debug
