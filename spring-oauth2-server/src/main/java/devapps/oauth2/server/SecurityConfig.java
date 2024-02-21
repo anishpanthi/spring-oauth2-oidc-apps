@@ -3,8 +3,10 @@ package devapps.oauth2.server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
@@ -15,12 +17,16 @@ public class SecurityConfig {
 
   @Bean
   public UserDetailsService userDetailsService() {
-    UserDetails anish = User.builder()
-        .username("anish")
-        .password("{noop}panthi")
-        .roles("ADMIN", "USER")
-        .build();
-    return new InMemoryUserDetailsManager(anish);
+    var user = User.builder();
+    return new InMemoryUserDetailsManager(
+        user.roles("ADMIN")
+            .username("anish")
+            .password("panthi")
+            .build());
   }
 
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 }

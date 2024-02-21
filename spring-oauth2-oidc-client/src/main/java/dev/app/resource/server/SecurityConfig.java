@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
@@ -26,23 +27,23 @@ import org.springframework.web.client.RestTemplate;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Bean
-  public SecurityFilterChain securityFilterChainForB2CLogin(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(
-            authorizeRequests ->
-                authorizeRequests
-                    .requestMatchers("/oauth2/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-//            .oauth2Login(Customizer.withDefaults())
-        .oauth2Login(
-            oauth2 ->
-                oauth2.tokenEndpoint(
-                    tokenEndpoint ->
-                        tokenEndpoint.accessTokenResponseClient(this::getTokenResponse)));
-    return http.build();
-  }
+//  @Bean
+//  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    http.authorizeHttpRequests(
+//            authorizeRequests ->
+//                authorizeRequests
+//                    .requestMatchers("/oauth2/**")
+//                    .permitAll()
+//                    .anyRequest()
+//                    .authenticated())
+//            .oauth2Login(Customizer.withDefaults());
+//        .oauth2Login(
+//            oauth2 ->
+//                oauth2.tokenEndpoint(
+//                    tokenEndpoint ->
+//                        tokenEndpoint.accessTokenResponseClient(this::getTokenResponse)));
+//    return http.build();
+//  }
 
   private OAuth2AccessTokenResponse getTokenResponse(
       OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest) {
