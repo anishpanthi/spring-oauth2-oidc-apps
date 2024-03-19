@@ -9,7 +9,7 @@ management:
 
 logging:
   level:
-    org.springframework.security: debug
+    org.springframework.security: info
     dev.app.resource.server: debug
 
 spring:
@@ -59,5 +59,6 @@ spring:
             scope: openid, profile, email, offline_access
             redirect-uri: http://localhost:8081/login/oauth2/code/okta
             client-name: Okta
+            authorization-grant-type: authorization_code
 server:
   port: 8081

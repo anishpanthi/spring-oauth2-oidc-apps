@@ -32,11 +32,11 @@ public class ApiController {
 
     OAuth2AccessToken accessToken =
         authorizedClientService
-            .loadAuthorizedClient("azure-b2c", principal.getName())
+            .loadAuthorizedClient("okta", principal.getName())
             .getAccessToken();
     OAuth2RefreshToken refreshToken =
         authorizedClientService
-            .loadAuthorizedClient("azure-b2c", principal.getName())
+            .loadAuthorizedClient("okta", principal.getName())
             .getRefreshToken();
     log.info("Access Token: {}", accessToken.getTokenValue());
     log.info(
